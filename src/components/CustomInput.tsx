@@ -2,7 +2,7 @@ type Props = {
 	type: string;
 	labelText?: string;
 	id?: string;
-	value?: string;
+	value?: string | number;
 	addClassName?: string;
 	placeholder?: string;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

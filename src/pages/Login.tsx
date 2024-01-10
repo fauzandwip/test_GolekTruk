@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import CustomInput from '../components/CustomInput';
-import ButtonSubmit from '../components/ButtonSubmit';
+import ButtonSubmit from '../components/CustomButton';
 
 const Login = () => {
 	const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ const Login = () => {
 	return (
 		<div className="w-full h-screen flex">
 			<div className="w-1/2 h-full bg-gradient-to-t from-cyan-500 to-blue-500 flex flex-col justify-center items-center gap-20">
-				<img src="https://golektruk.com/login.png" alt="" />
+				<img src="https://golektruk.com/login.png" alt="Image" />
 				<h1 className=" text-4xl text-white font-bold">GolekTruk</h1>
 			</div>
 			<div className="w-1/2 h-full flex justify-center items-center">
@@ -37,7 +37,7 @@ const Login = () => {
 							setPassword(e.target.value);
 						}}
 					/>
-					<ButtonSubmit value={'Login'} />
+					<ButtonSubmit value={'LOGIN'} />
 				</div>
 			</div>
 		</div>
