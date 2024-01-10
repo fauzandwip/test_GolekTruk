@@ -1,10 +1,41 @@
 import { useState } from 'react';
 import CustomInput from '../components/CustomInput';
-import ButtonSubmit from '../components/CustomButton';
+import CustomButton from '../components/CustomButton';
+import api from '../api';
+import { setToken } from '../helpers/localStorage';
+import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const navigate = useNavigate();
+	const [email, setEmail] = useState('jack1@gmail.com');
+	const [password, setPassword] = useState('12345');
+
+	const handleOnLogin = async () => {
+		try {
+			console.log('on login');
+			console.log({ email, password });
+			const { data } = await api.post(
+				'/login',
+				{
+					username: email,
+					password,
+				},
+				{
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+					},
+				}
+			);
+			console.log(data, 'data from server');
+			setToken(data.access_token);
+			navigate('/');
+		} catch (error) {
+			console.log(error);
+			const err = error as AxiosError;
+			console.log(err.response?.data.detail);
+		}
+	};
 
 	return (
 		<div className="w-full h-screen flex">
@@ -37,7 +68,7 @@ const Login = () => {
 							setPassword(e.target.value);
 						}}
 					/>
-					<ButtonSubmit value={'LOGIN'} />
+					<CustomButton value={'LOGIN'} onClick={handleOnLogin} />
 				</div>
 			</div>
 		</div>
