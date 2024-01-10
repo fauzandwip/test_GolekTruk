@@ -1,5 +1,5 @@
 type Props = {
-	type: string;
+	type?: string;
 	labelText?: string;
 	id?: string;
 	value?: string | number;
