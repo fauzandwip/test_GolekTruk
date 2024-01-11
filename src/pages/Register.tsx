@@ -3,7 +3,7 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import IconProfile from '../components/IconProfile';
 import api from '../api';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 enum Section {
 	profile = 'profile',
@@ -174,10 +174,12 @@ const Register = () => {
 									</div>
 								</div>
 							</div>
-							<CustomButton
-								value={'NEXT'}
-								onClick={() => setSection(Section.authentication)}
-							/>
+							<div className="w-full mt-8">
+								<CustomButton
+									value={'NEXT'}
+									onClick={() => setSection(Section.authentication)}
+								/>
+							</div>
 						</>
 					) : (
 						<>
@@ -206,7 +208,7 @@ const Register = () => {
 								placeholder={'password'}
 								onChange={(e) => onSetUser(e, 'password')}
 							/>
-							<div className="w-full flex flex-col">
+							<div className="w-full flex flex-col gap-4 mt-8">
 								<CustomButton value={'REGISTER'} onClick={handleOnRegister} />
 								<CustomButton
 									value={'BACK'}
@@ -215,6 +217,12 @@ const Register = () => {
 							</div>
 						</>
 					)}
+					<div className="text-sm">
+						You have account?
+						<Link to={'/login'}>
+							<span className="text-cyan-700 ms-1 font-bold">Login now</span>
+						</Link>
+					</div>
 				</div>
 			</div>
 			<div className="w-1/2 h-full p-32 bg-gradient-to-t from-cyan-500 to-blue-500 flex flex-col justify-center items-center gap-20">

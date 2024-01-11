@@ -4,7 +4,7 @@ import CustomButton from '../components/CustomButton';
 import api from '../api';
 import { setToken } from '../helpers/localStorage';
 import { AxiosError } from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -68,7 +68,17 @@ const Login = () => {
 							setPassword(e.target.value);
 						}}
 					/>
-					<CustomButton value={'LOGIN'} onClick={handleOnLogin} />
+					<div className="mt-8 w-full flex flex-col items-center gap-4">
+						<CustomButton value={'LOGIN'} onClick={handleOnLogin} />
+						<div className="text-sm">
+							Don't have account?
+							<Link to={'/register'}>
+								<span className="text-cyan-700 ms-1 font-bold">
+									Create an account
+								</span>
+							</Link>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from 'react-router-dom';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import { getToken } from '../helpers/localStorage';
+import AnalyticPage from '../pages/Analytic';
 
 const router = createBrowserRouter([
 	{
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <div>Home</div>,
+				element: <AnalyticPage />,
 			},
 		],
 	},
