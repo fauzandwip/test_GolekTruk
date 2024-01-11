@@ -3,7 +3,7 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import api from '../api';
 import { setToken } from '../helpers/localStorage';
-import { AxiosError } from 'axios';
+// import { AxiosError } from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -32,18 +32,18 @@ const Login = () => {
 			navigate('/');
 		} catch (error) {
 			console.log(error);
-			const err = error as AxiosError;
-			console.log(err.response?.data.detail);
+			// const err = error as AxiosError;
+			// console.log(err.response?.data.detail);
 		}
 	};
 
 	return (
 		<div className="w-full h-screen flex">
-			<div className="w-1/2 h-full bg-gradient-to-t from-cyan-500 to-blue-500 flex flex-col justify-center items-center gap-20">
+			<div className="hidden w-1/2 h-full bg-gradient-to-t from-cyan-500 to-blue-500 lg:flex flex-col justify-center items-center gap-20">
 				<img src="https://golektruk.com/login.png" alt="Image" />
 				<h1 className=" text-4xl text-white font-bold">GolekTruk</h1>
 			</div>
-			<div className="w-1/2 h-full flex justify-center items-center">
+			<div className="w-full lg:w-1/2 h-full flex justify-center items-center">
 				<div className="w-3/4 h-max shadow-inner shadow-cyan-500 rounded-lg flex flex-col items-center py-20 px-10 gap-4">
 					<h1 className="bg-clip-text text-transparent bg-cyan-600 font-bold text-5xl p-2">
 						Login

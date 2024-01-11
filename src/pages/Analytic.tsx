@@ -7,8 +7,8 @@ import { DownloadTableExcel } from 'react-export-table-to-excel';
 import { useNavigate } from 'react-router-dom';
 
 const AnalyticPage = () => {
-	// const [startDate, setStartDate] = useState('');
-	// const [endDate, setEndDate] = useState('');
+	// const [startDate, setStartDate] = useState<Date>(new Date());
+	// const [endDate, setEndDate] = useState<Date>(new Date());
 	const navigate = useNavigate();
 	const tableRef = useRef(null);
 	const [rangeDates, setRangeDates] = useState<string[]>([]);
@@ -55,6 +55,7 @@ const AnalyticPage = () => {
 				<div className="flex items-center gap-4">
 					<p className="text-lg font-medium">Filter</p>
 					<DateRangePicker
+						// value={[startDate, endDate]}
 						onChange={(e) => {
 							if (e?.length) {
 								const startDate = e[0];
@@ -96,7 +97,7 @@ const AnalyticPage = () => {
 										// console.log(data, 'analytic from server');
 									} catch (error) {
 										console.log(error);
-										console.log(error.response.data.detail);
+										// console.log(error.response.data.detail);
 									}
 								});
 								// console.log(analyticDatas);
@@ -116,56 +117,60 @@ const AnalyticPage = () => {
 			</div>
 
 			<div className="relative overflow-x-auto">
-				<table
-					ref={tableRef}
-					className="w-full text-sm text-left rtl:text-right text-gray-400"
-				>
-					<thead className="text-xs uppercase bg-gray-700 text-gray-400">
-						<tr>
-							<th scope="col" className="px-6 py-3">
-								Item
-							</th>
-							<th scope="col" className="px-6 py-3">
-								Total
-							</th>
-							{Boolean(rangeDates.length) &&
-								rangeDates.map((data, index) => {
+				{Boolean(analyticDatas.length) && (
+					<table
+						ref={tableRef}
+						className="w-full text-sm text-left rtl:text-right text-gray-400"
+					>
+						<thead className="text-xs uppercase bg-gray-700 text-gray-400">
+							<tr>
+								<th scope="col" className="px-6 py-3">
+									Item
+								</th>
+								<th scope="col" className="px-6 py-3">
+									Total
+								</th>
+								{Boolean(rangeDates.length) &&
+									rangeDates.map((data, index) => {
+										return (
+											<th key={index} scope="col" className="px-6 py-3">
+												{`${new Date(data).getDate()}-${
+													new Date(data).getMonth() + 1
+												}`}
+											</th>
+										);
+									})}
+							</tr>
+						</thead>
+						<tbody>
+							{Boolean(scopes.size) &&
+								Array.from(scopes).map((scope, index) => {
 									return (
-										<th key={index} scope="col" className="px-6 py-3">
-											{new Date(data).getDate()}
-										</th>
+										<tr
+											key={index}
+											className=" border-b bg-gray-800 border-gray-700"
+										>
+											<th
+												scope="row"
+												className="px-6 py-4 font-medium whitespace-nowrap text-white"
+											>
+												{scope}
+											</th>
+											<td>{getTotalCount(scope)}</td>
+											{Boolean(analyticDatas.length) &&
+												analyticDatas.map((data, index) => {
+													return (
+														<td key={index} className="px-6 py-4">
+															{data.find((el) => el.scope === scope)?.count}
+														</td>
+													);
+												})}
+										</tr>
 									);
 								})}
-						</tr>
-					</thead>
-					<tbody>
-						{Boolean(scopes.size) &&
-							Array.from(scopes).map((scope, index) => {
-								return (
-									<tr
-										key={index}
-										className=" border-b bg-gray-800 border-gray-700"
-									>
-										<th
-											scope="row"
-											className="px-6 py-4 font-medium whitespace-nowrap text-white"
-										>
-											{scope}
-										</th>
-										<td>{getTotalCount(scope)}</td>
-										{Boolean(analyticDatas.length) &&
-											analyticDatas.map((data, index) => {
-												return (
-													<td key={index} className="px-6 py-4">
-														{data.find((el) => el.scope === scope)?.count}
-													</td>
-												);
-											})}
-									</tr>
-								);
-							})}
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				)}
 			</div>
 		</div>
 	);

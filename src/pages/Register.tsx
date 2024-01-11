@@ -79,7 +79,7 @@ const Register = () => {
 			}
 		} catch (error) {
 			console.log(error);
-			console.log(error.response.data.detail);
+			// console.log(error.response.data.detail);
 		}
 	};
 
@@ -97,7 +97,7 @@ const Register = () => {
 			navigate('/login');
 		} catch (error) {
 			console.log(error);
-			console.log(error.response.data.detail);
+			// console.log(error.response.data.detail);
 		}
 	};
 
@@ -105,7 +105,7 @@ const Register = () => {
 
 	return (
 		<div className="w-full h-screen flex">
-			<div className="w-1/2 h-full flex justify-center items-center">
+			<div className="w-full lg:w-1/2 h-full flex justify-center items-center">
 				<div className="w-3/4 h-max shadow-inner shadow-cyan-500 rounded-lg flex flex-col items-center justify-center py-10 px-10 gap-4">
 					<h1 className="bg-clip-text text-transparent bg-cyan-600 font-bold text-5xl p-2 mb-10">
 						Register
@@ -225,7 +225,7 @@ const Register = () => {
 					</div>
 				</div>
 			</div>
-			<div className="w-1/2 h-full p-32 bg-gradient-to-t from-cyan-500 to-blue-500 flex flex-col justify-center items-center gap-20">
+			<div className="hidden w-1/2 h-full p-32 bg-gradient-to-t from-cyan-500 to-blue-500 lg:flex flex-col justify-center items-center gap-20">
 				<img
 					src="https://golektruk.com/registrasi.png"
 					alt="Image"
