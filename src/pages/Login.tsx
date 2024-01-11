@@ -8,8 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState('jack1@gmail.com');
-	const [password, setPassword] = useState('12345');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	const handleOnLogin = async () => {
 		try {

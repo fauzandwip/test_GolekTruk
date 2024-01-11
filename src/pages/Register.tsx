@@ -25,11 +25,11 @@ const Register = () => {
 	const [imageURL, setImageURL] = useState('');
 	const [image, setImage] = useState<File | null>(null);
 	const [user, setUser] = useState<User>({
-		email: 'jack2@gmail.com',
-		name: 'Test Jack',
-		phone: '628912345678',
-		password: '12345',
-		age: 22,
+		email: '',
+		name: '',
+		phone: '',
+		password: '',
+		age: 18,
 		photos: [],
 	});
 
