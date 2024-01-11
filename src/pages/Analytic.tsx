@@ -4,10 +4,12 @@ import { DateRangePicker } from 'rsuite';
 import api from '../api';
 import { getToken } from '../helpers/localStorage';
 import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { useNavigate } from 'react-router-dom';
 
 const AnalyticPage = () => {
 	// const [startDate, setStartDate] = useState('');
 	// const [endDate, setEndDate] = useState('');
+	const navigate = useNavigate();
 	const tableRef = useRef(null);
 	const [rangeDates, setRangeDates] = useState<string[]>([]);
 	const [analyticDatas, setAnalyticDatas] = useState<
@@ -31,21 +33,25 @@ const AnalyticPage = () => {
 		return total;
 	};
 
+	const handleOnLogout = () => {
+		localStorage.removeItem('access_token');
+		navigate('/login');
+	};
+
 	return (
-		<div className="w-full min-h-screen flex flex-col p-10 bg-cyan-500">
-			<div className="w-full p-4 flex justify-between items-center bg-cyan-300">
+		<div className="w-full min-h-screen flex flex-col p-10 bg-cyan-300">
+			<div className="w-full p-4 flex justify-between items-center">
 				<h1 className="text-3xl font-bold">Analytic Reports</h1>
 				<div className="w-max">
-					<DownloadTableExcel
-						filename="users table"
-						sheet="users"
-						currentTableRef={tableRef.current}
+					<button
+						className="bg-red-500 px-6 py-2 rounded-md text-slate-100 font-medium text-md"
+						onClick={handleOnLogout}
 					>
-						<CustomButton value="Export Report" />
-					</DownloadTableExcel>
+						Logout
+					</button>
 				</div>
 			</div>
-			<div className="w-full h-20 ps-4 flex items-center bg-cyan-200">
+			<div className="w-full h-20 ps-4 flex justify-between items-center">
 				<div className="flex items-center gap-4">
 					<p className="text-lg font-medium">Filter</p>
 					<DateRangePicker
@@ -98,14 +104,23 @@ const AnalyticPage = () => {
 						}}
 					/>
 				</div>
+				<div className="w-max">
+					<DownloadTableExcel
+						filename="Analytic Datas"
+						sheet="analytic"
+						currentTableRef={tableRef.current}
+					>
+						<CustomButton value="Export Report" />
+					</DownloadTableExcel>
+				</div>
 			</div>
 
 			<div className="relative overflow-x-auto">
 				<table
 					ref={tableRef}
-					className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+					className="w-full text-sm text-left rtl:text-right text-gray-400"
 				>
-					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+					<thead className="text-xs uppercase bg-gray-700 text-gray-400">
 						<tr>
 							<th scope="col" className="px-6 py-3">
 								Item
@@ -129,11 +144,11 @@ const AnalyticPage = () => {
 								return (
 									<tr
 										key={index}
-										className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+										className=" border-b bg-gray-800 border-gray-700"
 									>
 										<th
 											scope="row"
-											className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+											className="px-6 py-4 font-medium whitespace-nowrap text-white"
 										>
 											{scope}
 										</th>
